@@ -1,4 +1,4 @@
-# dotfiles
+# dotfiles-solus-i3
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -53,8 +53,8 @@ package.
 ### With included bash scripts
 
 ```
-git clone https://github.com/jeffrey-xiao/dotfiles.git
-cd dotfiles
+git clone https://github.com/jeffrey-xiao/dotfiles-solus-i3.git
+cd dotfiles-solus-i3
 ./symlink
 ./install
 ```
@@ -64,8 +64,8 @@ Any errors with the installation will appear in `install.log`.
 ### With [`dotinstall`](https://github.com/jeffrey-xiao/dotinstall)
 
 ```
-git clone https://github.com/jeffrey-xiao/dotfiles.git
-cd dotfiles
+git clone https://github.com/jeffrey-xiao/dotfiles-solus-i3.git
+cd dotfiles-solus-i3
 pip3 install dotinstall
 dotinstall
 ```
@@ -102,7 +102,7 @@ the exception of the transparent background in `urxvt`, and the colors in `dirco
 
 ## License
 
-`dotfiles` is dual-licensed under the terms of either the MIT License or the Apache License
+`dotfiles-solus-i3` is dual-licensed under the terms of either the MIT License or the Apache License
 (Version 2.0).
 
 See [LICENSE-APACHE](LICENSE-APACHE) and [LICENSE-MIT](LICENSE-MIT) for more details.
