@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[parfill]{parskip}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\geometry{%
+  left=2cm,
+  right=2cm,
+  top=3cm,
+  bottom=3cm,
+}
+\pagestyle{fancy}
+\setlist[enumerate]{topsep=-0.15cm,itemsep=-0.15cm,partopsep=-0.15cm,parsep=0.15cm,leftmargin=0.5cm,after=\vspace{\medskipamount}}
+\setlist[itemize]{topsep=-0.15cm,itemsep=-0.15cm,partopsep=-0.15cm,parsep=0.15cm,leftmargin=0.5cm,after=\vspace{\medskipamount}}
+
+% Setting options for parskip
+\setlength{\parskip}{0.4cm}
+
+% Setting options for minted
+\setminted{linenos, numbersep=0.20cm, frame=single}
+\renewcommand{\theFancyVerbLine}{\textcolor[rgb]{0,0,0}{\oldstylenums{\arabic{FancyVerbLine}}}}
+
+% Setting environments for amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip\thm@postskip=0pt
+}
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}{Corollary}[thm]
+\newtheorem{lem}{Lemma}[thm]
+\newtheorem{prop}{Proposition}[thm]
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\theoremstyle{definition}
+\newtheorem{ex}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+\theoremstyle{remark}
+\newtheorem*{prf}{Proof}
+
+% Setting title format and spacing
+\titleformat*{\section}{\huge\scshape}
+\titlespacing*{\section}{0cm}{0cm}{0cm}
+\titleformat*{\subsection}{\LARGE\scshape}
+\titlespacing*{\subsection}{0cm}{0cm}{0cm}
+\titleformat*{\subsubsection}{\Large\scshape}
+\titlespacing*{\subsubsection}{0cm}{0cm}{0cm}
+\titleformat*{\paragraph}{\Large\scshape}
+\titleformat*{\subparagraph}{\Large\scshape}
+
+\newcommand{\courseName}{{{++}}}
+\newcommand{\termDate}{Spring 2018}
+
+\lhead{\courseName}
+\chead{}
+\rhead{Jeffrey Xiao}
+
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+\begin{document}
+
+\begingroup
+  \centering
+  \LARGE \courseName\\[0.25cm]
+  \large \termDate\par
+\endgroup
+\tableofcontents
+\thispagestyle{fancy}
+
+\end{document}

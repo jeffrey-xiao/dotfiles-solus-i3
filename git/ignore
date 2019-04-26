@@ -1,0 +1,63 @@
+# Compiled source
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.xz
+*.lzma
+
+# Packing-Only Formats
+*.iso
+*.tar
+
+# Package Management Formats
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# Logs and Databases
+*.log
+*.sqlite
+
+# OS Generated Files
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Windows Image File Caches
+Thumbs.db
+
+# Folder Config File
+Desktop.ini
+
+# Vim
+.swp
+.swo
+.*.swp
+.*.swo
+
+# Javascript
+node_modules
+bower_components
+npm-debug.log
+
+# Ack and Ag ignore
+.ackrc
+.ignore

@@ -1,0 +1,31 @@
+#!/bin/sh
+
+dmenu_cmd() {
+  rofi -i -fuzzy -dmenu -p "$1"
+}
+
+power_options="lock\\nlogout\\nsuspend\\nhibernate\\nreboot\\npoweroff"
+selected_power_option=$(printf "%b" "$power_options" | dmenu_cmd "power")
+[ -z "$selected_power_option" ] && exit
+
+case "$selected_power_option" in
+  "lock")
+    lock
+    ;;
+  "logout")
+    pgrep --exact i3 > /dev/null && i3-msg exit
+    pgrep --exact bspwm > /dev/null && bspc quit
+    ;;
+  "suspend")
+    systemctl suspend
+    ;;
+  "hibernate")
+    systemctl hibernate
+    ;;
+  "reboot")
+    systemctl reboot
+    ;;
+  "poweroff")
+    systemctl poweroff
+    ;;
+esac

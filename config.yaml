@@ -1,0 +1,196 @@
+bash:
+  link: ~/.config/bash/
+
+bin:
+  link: ~/.local/bin/
+
+compton:
+  link: ~/.config/compton/
+  dependencies:
+    - compton
+
+feh:
+  link: ~/.config/feh/
+  dependencies:
+    - feh
+
+fonts:
+  link:
+    - fonts.conf: ~/.config/fontconfig/
+  postlink:
+    - >
+      git clone https://github.com/powerline/fonts ~/Documents/fonts/powerline-fonts &&
+      . ~/Documents/fonts/powerline-fonts/install.sh
+    - >
+      sudo rm -f /usr/share/fonts/conf.d/70-no-bitmaps.conf &&
+      sudo ln -svf /usr/share/fontconfig/conf.avail/70-yes-bitmaps.conf /usr/share/fonts/conf.d
+    - >
+      cp ./fonts/!(fonts.conf) ~/.local/share/fonts/ &&
+      (cd ~/.local/share/fonts/ && mkfontdir && mkfontscale)
+    - fc-cache --force --verbose
+  dependencies:
+    - mkfontdir
+    - mkfontscale
+    - xset
+
+git:
+  link: ~/.config/git/
+
+htop:
+  link: ~/.config/htop/
+  dependencies:
+    - htop
+
+i3:
+  link: ~/.config/i3/
+  dependencies:
+    - acpi
+    - blueman
+    - gnome-settings-daemon
+    - i3
+    - i3lock
+    - imagemagick
+    - jq
+    - network-manager
+    - numix-gtk-theme
+    - papirus-icon-theme
+    - rofi
+    - scrot
+    - slop
+    - sysstat
+    - xbacklight
+    - xclip
+    - xinput
+  postlink:
+    - gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+    - gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+    - gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+
+misc:
+  link:
+    - redshift.conf: ~/.config/redshift/
+  dependencies:
+    - cabextract
+    - p7zip
+    - redshift
+    - youtube-dl
+
+mpd:
+  link: ~/.config/mpd/
+  postlink:
+    - mkdir -pv ~/.config/mpd/playlists/
+    - touch ~/.config/mpd/database
+  dependencies:
+    - mpc
+    - mpd
+
+mpv:
+  link: ~/.config/mpv/
+  postlink:
+    - mkdir -pv ~/Pictures/Screenshots/
+  dependencies:
+    - mpv
+
+ncmpcpp:
+  link: ~/.config/ncmpcpp/
+  dependencies:
+    - ncmpcpp
+
+polybar:
+  link: ~/.config/polybar/
+  dependencies:
+    - font-awesome-ttf
+    - polybar
+
+ranger:
+  link: ~/.config/ranger/
+  dependencies:
+    - atool
+    - feh
+    - highlight
+    - imagemagick
+    - ranger
+    - w3m
+
+rtorrent:
+  link: ~/.config/rtorrent/
+  postlink:
+    - mkdir -pv ~/Downloads/complete/ ~/Downloads/incomplete/ ~/.config/rtorrent/sessions/
+  dependencies:
+    - rtorrent
+
+sxhkd:
+  link: ~/.config/sxhkd
+  dependencies:
+    - sxhkd
+
+system:
+  prelink:
+    - sudo eopkg install --yes-all --component system.devel
+  link: ~/
+  dependencies:
+    - rxvt-unicode
+    - xrdb
+
+dunst:
+  prelink:
+    - ./bin/compile-color-template ./dunst/dunstrc.template ./dunst/dunstrc
+  link:
+    - dunstrc: ~/.config/dunst/
+  dependencies:
+    - dunst
+
+tmux:
+  link: ~/.config/tmux/
+  dependencies:
+    - tmux
+
+vim:
+  link:
+    - minisnip: ~/.vim/
+    - after: ~/.vim/
+    - "*": ~/
+    - ".*": ~/
+  postlink:
+    - vim --cmd PlugInstall --cmd q! --cmd q!
+    - >
+      curl --silent --location https://raw.githubusercontent.com/creationix/nvm/master/install.sh --output install_nvm.sh &&
+      chmod 775 install_nvm.sh &&
+      ./install_nvm.sh &&
+      rm -f install_nvm.sh
+    - sudo pip install jedi flake8 autopep8 pylint yapf
+    - >
+      sudo npm install --global eslint tern prettier &&
+      (cd ~/.vim/plugged/tern_for_vim && npm install)
+    - >
+      curl --silent --show-error --fail https://sh.rustup.rs | sh &&
+      export PATH="$PATH:~/.cargo/bin" &&
+      rustup install nightly &&
+      rustup default nightly &&
+      rustup component add rust-src rustfmt clippy &&
+      cargo install racer
+  dependencies:
+    - cppcheck
+    - ctags
+    - curl
+    - llvm-clang
+    - nodejs
+    - pandoc
+    - pip
+    - silver-searcher
+    - vim
+
+weechat:
+  link: ~/.config/weechat/
+  dependencies:
+    - weechat
+
+zathura:
+  prelink:
+    - ./bin/compile-color-template ./zathura/zathurarc.template ./zathura/zathurarc
+  link:
+    - zathurarc: ~/.config/zathura/
+  dependencies:
+    - texlive-all
+    - xdotool
+    - zathura

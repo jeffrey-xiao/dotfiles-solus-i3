@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+# Get directory for symlink script.
+DOTFILES_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+shopt -s dotglob
+shopt -s extglob
+shopt -s globstar
+shopt -s nullglob
+
+# Link to ~.
+for f in "$DOTFILES_DIR/system"/!(*.template); do
+  ln -sfv "$f" ~/
+done
+
+# Compile templates
+for template_name in "$DOTFILES_DIR"/**/*.template; do
+  compiled_name=${template_name%.*}
+  "$DOTFILES_DIR"/bin/compile-color-template "$template_name" "$compiled_name"
+done
+
+# Link to .config/$folder.
+for folder in bash compton dunst feh git htop i3 mpd mpv ncmpcpp polybar ranger rtorrent sxhkd tmux weechat zathura; do
+  mkdir -pv ~/.config/$folder/
+  for f in "$DOTFILES_DIR/$folder"/!(*.template); do
+    ln -sfv "$f" ~/.config/$folder/
+  done
+done
+
+# Link bin.
+mkdir -pv ~/.local/bin/
+for f in "$DOTFILES_DIR/bin"/!(*.template); do
+  ln -sfv "$f" ~/.local/bin/
+done
+
+# Link vim options.
+ln -sfv "$DOTFILES_DIR/vim/.vimrc" ~/
+ln -sfv "$DOTFILES_DIR/vim/.tern-config" ~/
+ln -sfv "$DOTFILES_DIR/vim/.clang_complete" ~/
+ln -sfv "$DOTFILES_DIR/vim/after" ~/.vim/
+ln -sfv "$DOTFILES_DIR/vim/minisnip" ~/.vim/
+
+# Link miscellaneous config.
+mkdir -pv ~/.config/redshift
+ln -sfv "$DOTFILES_DIR/misc/redshift.conf" ~/.config/redshift
+
+# Link font config.
+mkdir -pv ~/.config/fontconfig
+ln -sfv "$DOTFILES_DIR/fonts/fonts.conf" ~/.config/fontconfig/
+
+# Set gnome settings.
+gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+gsettings set org.gnome.desktop.interface gtk-theme "Numix"
+gsettings set org.gnome.desktop.wm.preferences theme "Numix"
+
+# Create a playlist folder and database file for mpd.
+mkdir -pv ~/.config/mpd/playlists/
+touch ~/.config/mpd/database
+
+# Create screenshot folder for mpv.
+mkdir -pv ~/Pictures/Screenshots/
+
+# Create complete, incomplete, and session folders for rtorrent.
+mkdir -pv ~/Downloads/complete/ ~/Downloads/incomplete/ ~/.config/rtorrent/sessions/
+
+# Apply ~/.Xresources.
+xrdb ~/.Xresources

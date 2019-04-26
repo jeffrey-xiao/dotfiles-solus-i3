@@ -1,0 +1,203 @@
+[bar/top]
+monitor = ${env:MONITOR}
+width = 100%
+height = 21
+
+background = ${xrdb:color8}
+foreground = ${xrdb:color7}
+
+line-size = 3
+
+padding = 0
+
+; Default font
+font-0 = "TamzenForPowerline:size=18;2"
+
+; Japanese characters
+font-1 = "M+ 2c:style=regular:size=10;2"
+
+; Icons
+font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-4 = "Font Awesome 5 Brands:pixelsize=10;2"
+
+tray-position = right
+
+modules-left = i3 mpd
+modules-center = date separator weather
+modules-right = memory cpu wired-network wireless-network pulseaudio battery
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+strip-wsnumbers = true
+index-sort = true
+
+format = <label-state> <label-mode>
+
+label-focused = %name%
+label-focused-foreground = ${xrdb:color8}
+label-focused-background = ${xrdb:color7}
+label-focused-padding = 1
+
+label-unfocused = %name%
+label-unfocused-foreground = ${xrdb:color8}
+label-unfocused-background = ${xrdb:color12}
+label-unfocused-padding = 1
+
+label-visible = %name%
+label-visible-foreground = ${xrdb:color8}
+label-visible-background = ${xrdb:color12}
+label-visible-padding = 1
+
+label-urgent = %name%
+label-urgent-foreground = ${xrdb:color8}
+label-urgent-background = ${xrdb:color1}
+label-urgent-padding = 1
+
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+format-online = <icon-prev> <toggle> <icon-next> <label-song>
+format-online-padding = 2
+
+format-offline = <label-offline>
+format-offline-padding = 2
+
+label-song = %artist% - %title%
+label-offline = MPD is offline
+icon-play = 
+icon-pause = 
+icon-prev = 
+icon-next = 
+
+[module/date]
+type = internal/date
+
+date = %a, %b %d
+time = %H:%M
+
+label = %date% - %time%
+
+[module/separator]
+type = custom/text
+content = " | "
+
+[module/weather]
+type = custom/script
+exec = get-weather
+interval = 300
+
+[module/memory]
+type = internal/memory
+
+interval = 3
+
+label =  %percentage_used%%
+label-foreground = ${xrdb:color8}
+label-background = ${xrdb:color7}
+label-padding = 1
+
+[module/cpu]
+type = internal/cpu
+
+interval = 3
+
+label =  %percentage%%
+label-foreground = ${xrdb:color8}
+label-background = ${xrdb:color7}
+label-padding = 1
+
+[module/wired-network]
+type = internal/network
+
+; Use following command to get wired interface
+; $ iwconfig
+interface = enp1s0
+
+label-connected =  %local_ip%
+label-connected-foreground = ${xrdb:color8}
+label-connected-background = ${xrdb:color7}
+label-connected-padding = 1
+
+[module/wireless-network]
+type = internal/network
+
+; Use following command to get wifi interface
+; $ iwconfig
+interface = wlp2s0
+
+label-connected =  %essid%
+label-connected-foreground = ${xrdb:color8}
+label-connected-background = ${xrdb:color7}
+label-connected-padding = 1
+
+label-disconnected =  none
+label-disconnected-foreground = ${xrdb:color8}
+label-disconnected-background = ${xrdb:color7}
+label-disconnected-padding = 1
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <ramp-volume> <label-volume>
+format-volume-foreground = ${xrdb:color8}
+format-volume-background = ${xrdb:color7}
+format-volume-padding = 1
+
+label-muted =  muted
+label-muted-foreground = ${xrdb:color8}
+label-muted-background = ${xrdb:color7}
+label-muted-padding = 1
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/battery]
+type = internal/battery
+
+full-at = 99
+
+; Use following command to get battery and adapter
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = ADP0
+
+format-charging = <animation-charging> <label-charging>
+format-charging-foreground = ${xrdb:color8}
+format-charging-background = ${xrdb:color7}
+
+format-discharging = <ramp-capacity> <label-discharging>
+format-discharging-foreground = ${xrdb:color8}
+format-discharging-background = ${xrdb:color7}
+
+label-charging = %percentage%%
+label-charging-foreground = ${xrdb:color8}
+label-charging-background = ${xrdb:color7}
+label-charging-padding-right = 1
+
+label-discharging = %percentage%%
+label-discharging-foreground = ${xrdb:color8}
+label-discharging-background = ${xrdb:color7}
+label-discharging-padding-right = 1
+
+label-full = "  %percentage%%"
+label-full-foreground = ${xrdb:color8}
+label-full-background = ${xrdb:color7}
+label-full-padding-right = 1
+
+animation-charging-0 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
+
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
